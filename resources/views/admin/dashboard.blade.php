@@ -144,7 +144,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-plus-circle text-primary"></i>
+                                    <i class="la la-user-plus text-primary"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">

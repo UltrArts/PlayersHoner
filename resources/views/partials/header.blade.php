@@ -107,7 +107,7 @@
                             <div class="dropdown-divider"></div>
                             {{-- <a class="dropdown-item" href="#"><i class="ti-settings"></i> Configura</a> --}}
                             <div class="dropdown-divider"></div>
-                            <form action="">
+                            <form action="{{ route('logout')}}" method="POST">
                                 @csrf
                                 @method('POST')
                                 {{-- <a type="submit" class="dropdown-item" href="#"><i class="fa fa-power-off text-dark"></i> Logout</a> --}}

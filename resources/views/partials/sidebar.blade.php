@@ -79,7 +79,7 @@
                 </a>
             </li>
             <li class="nav-item log-out">
-                <form action="{{ route('logout')}}">
+                <form action="{{ route('logout')}}" method="POST">
                     @csrf
                     @method('POST')
                     <button type="submit"  data-toggle="modal" data-target="#modalUpdate">
