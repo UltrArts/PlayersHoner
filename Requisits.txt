@@ -1,0 +1,22 @@
+REQUISITOS FUNIONAIS
+
+* Adicionar Novo Jogador;
+* Adicionar Contas Bancárias e Associá-las à Jogadores;
+* Definir Percentagem de Corte;
+* Actualizar Dados do Jogador;
+* Definir/Actualizar Estado[Activo/Reformado] do Jogador;
+* Definir a Data e o Valor Que Os Jogadores Reformados Irão Oferir Mensalmente;
+* Permitir Que o Jogador Faça Consultas de Saldo e Pedidos De Extracto De Movimentos No Sistema;
+* Actualizar Disponibidade[Activo/Inactivo] de Jogador Sempre Que Necessário;
+* Garantir Que Quando a Disponibilidade Do Jogador For 'Inactiva', O Jogador Não receba Pensão;
+* Garantir Que Somente Jogadores Reformados Recebam o Valor da Pensão Mensal.
+
+
+REQUISITOS NÃO FUNCIONAIS
+
+* Alertar Ao Jogador Quando O Seu Saldo For Crítico;
+* Permitir Que O Administrador Defina O Valor Considerado Crítico;
+* Assegurar Que O Jogador E O Administrador Se Autentiquem Para Aceder Ao Sistema;
+* O Sistema Deverá Ter 2 Níveis de Acesso, nomeadamente: Jogador e Administrador.
+* O Jogador Só Pode Ter Uma Conta Associada A Ele;
+* Deve Haver Documento De Contractual Entre A Empresa E O Jogador;
