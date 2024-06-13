@@ -2,5 +2,5 @@
 
 @section('content')
     @livewire('admin.players')
-
+    
 @endsection

@@ -18,8 +18,26 @@ class Account extends Model
         'account_nib',
         'balance',
         'is_available',
-        'tax_value'
+        'tax_value',
+        'bank_id',
+        'tax_type_id',
+        'player_id',
     ];
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class);
+    }
+
+    public function player()
+    {
+        return $this->belongsTo(Player::class);
+    }
+
+    public function taxType()
+    {
+        return $this->belongsTo(TaxType::class);
+    }
 
 
 }

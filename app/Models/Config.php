@@ -16,7 +16,7 @@ class Config extends Model
 
     protected $fillable = [
         'critical_balance',
-        'payment_date'
+        'payment_day'
     ];
     
 }

@@ -90,14 +90,14 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{asset('assets/img/profile.jpg')}}" alt="user-img" width="36" class="img-circle"><span >Edson Da Cruz</span></span> </a>
+                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{asset('assets/img/profile.png')}}" alt="user-img" width="36" class="img-circle"><span >{{Auth::user()->name}}</span></span> </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
                             <div class="user-box">
-                                <div class="u-img"><img src="{{asset('assets/img/profile.jpg')}}" alt="user"></div>
+                                <div class="u-img"><img src="{{asset('assets/img/profile.png')}}" alt="user"></div>
                                 <div class="u-text">
-                                    <h4>Edson Da Cruz</h4>
-                                    <p class="text-muted">edsondacruz@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">Ver Perfil</a></div>
+                                    <h4>{{Auth::user()->name}}</h4>
+                                    <p class="text-muted">{{Auth::user()->email}}</p><a href="#"    data-toggle="modal" data-target="#modalProfile" class="btn btn-rounded btn-success btn-sm">Ver Perfil</a></div>
                                 </div>
                             </li>
                             <div class="dropdown-divider"></div>

@@ -3,7 +3,11 @@
 @section('content')
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">Dashboard</h4>
+        @isset($error)
+            <h4>{{$error}}</h4>
+        @else
+            <h4 class="page-title">Dashboard</h4>
+        @endisset
         <div class="row">
             <div class="col-md-3">
                 <div class="card card-stats card-warning">
@@ -17,7 +21,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <p class="card-category">Total de Jogadores</p>
-                                    <h4 class="card-title">1,294</h4>
+                                    <h4 class="card-title"> {{$totalPlayers}} </h4>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +116,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <p class="card-category">Jogadores Activos</p>
-                                    <h4 class="card-title">$ 1,345</h4>
+                                    <h4 class="card-title"> {{$activePlayers}} </h4>
                                 </div>
                             </div>
                         </div>
@@ -130,8 +134,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Jogadores Inactivos</p>
-                                    <h4 class="card-title">23</h4>
+                                    <p class="card-category">Jogadores Reformados</p>
+                                    <h4 class="card-title"> {{$retiredPlayers}} </h4>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +154,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <p class="card-category">Pré-Registados</p>
-                                    <h4 class="card-title">+45K</h4>
+                                    <h4 class="card-title"> {{$preRegisteredPlayers}} </h4>
                                 </div>
                             </div>
                         </div>
@@ -172,19 +176,44 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Estatística Financeira</h4>
-                        <p class="card-category">
-                        Valores de entradas e saídas mensais na conta da empresa.</p>
+                @if (Auth::user()->hasRole('admin'))
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Estatística Financeira</h4>
+                            <p class="card-category">
+                            Valores de entradas e saídas mensais na conta da empresa.</p>
+                        </div>
+                        <div class="card-body">
+                            <div id="salesChart" class="chart"></div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div id="salesChart" class="chart"></div>
+                    
+                @else
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Mapa Mundi</h4>
+                            <p class="card-category">
+                            Países em que operamos</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="mapcontainer">
+                                <div class="map">
+                                    {{-- <span>Alternative content for the map</span> --}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    
+                @endif
             </div>
+
+
+
+
         </div>
     </div>
 </div>
+
+
 
 @endsection

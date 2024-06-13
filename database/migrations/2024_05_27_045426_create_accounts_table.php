@@ -17,16 +17,16 @@ return new class extends Migration
             $table->string('account_nib');
             $table->decimal('balance', 10, 2)->default(0.00);
             $table->boolean('is_available')->default(true);
-            $table->decimal('tax_value', 5, 2)->nullable();
-            $table->unsignedBigInteger('id_tax_type');
-            $table->decimal('tax_value', 5, 2)->nullable();
-            $table->unsignedBigInteger('id_tax_type');
-            $table->unsignedBigInteger('id_bank');
-            $table->unsignedBigInteger('id_player');
+            $table->decimal('tax_value', 10, 2)->nullable();
+            $table->decimal('retirement_amount', 10, 2)->nullable();
+            $table->unsignedBigInteger('tax_type_id');
+            $table->unsignedBigInteger('bank_id');
+            $table->unsignedBigInteger('player_id');
             $table->timestamps();
 
-            $table->foreign('id_bank')->references('id')->on('banks')->onDelete('cascade');
-            $table->foreign('id_player')->references('id')->on('players')->onDelete('cascade');
+            $table->foreign('bank_id')->references('id')->on('banks')->onDelete('cascade');
+            $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+            $table->foreign('tax_type_id')->references('id')->on('players')->onDelete('cascade');
         
         });
     }
@@ -37,9 +37,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('accounts', function (Blueprint $table) {
-            $table->dropForeign(['id_bank']);
-            $table->dropForeign(['id_player']);
-            $table->dropForeign(['id_tax_type']);
+            $table->dropForeign(['bank_id']);
+            $table->dropForeign(['player_id']);
+            $table->dropForeign(['tax_type_id']);
 
         });
         Schema::dropIfExists('accounts');

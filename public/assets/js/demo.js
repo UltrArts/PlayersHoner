@@ -14,18 +14,6 @@ Circles.create({
 	styleText:    true
 })
 
-$.notify({
-	icon: 'la la-bell',
-	title: 'Bootstrap notify',
-	message: 'Turning standard Bootstrap alerts into "notify" like notifications',
-},{
-	type: 'success',
-	placement: {
-		from: "bottom",
-		align: "right"
-	},
-	time: 1000,
-});
 
 // monthlyChart
 
@@ -123,35 +111,44 @@ $(".mapcontainer").mapael({
 				// 	text: {content: "Morbihan", attrs: {"font-size": 10}},
 				// 	tooltip: {content: "<b>Morbihan</b> <br /> Bretagne"}
 				// },
-				"ID": {
-					tooltip: {content: "<b>Indonesia</b> <br /> Tempat Lahir Beta"},
-					attrs: {
-						fill: "#59d05d"
-					}
-					, attrsHover: {
-						fill: "#59d05d"
-					}
-				},
-				"RU": {
-					tooltip: {content: "<b>Russia</b>"},
-					attrs: {
-						fill: "#59d05d"
-					}
-					, attrsHover: {
-						fill: "#59d05d"
-					}					
-				},
-				"US": {
-					tooltip: {content: "<b>United State</b>"},
-					attrs: {
-						fill: "#59d05d"
-					}
-					, attrsHover: {
-						fill: "#59d05d"
-					}					
-				},
-				"AU": {
-					tooltip: {content: "<b>Australia</b>"},
+				// "ID": {
+				// 	tooltip: {content: "<b>Indonesia</b> <br /> Tempat Lahir Beta"},
+				// 	attrs: {
+				// 		fill: "#59d05d"
+				// 	}
+				// 	, attrsHover: {
+				// 		fill: "#59d05d"
+				// 	}
+				// },
+				// "RU": {
+				// 	tooltip: {content: "<b>Russia</b>"},
+				// 	attrs: {
+				// 		fill: "#59d05d"
+				// 	}
+				// 	, attrsHover: {
+				// 		fill: "#59d05d"
+				// 	}					
+				// },
+				// "US": {
+				// 	tooltip: {content: "<b>United State</b>"},
+				// 	attrs: {
+				// 		fill: "#59d05d"
+				// 	}
+				// 	, attrsHover: {
+				// 		fill: "#59d05d"
+				// 	}					
+				// },
+				// "AU": {
+				// 	tooltip: {content: "<b>Australia</b>"},
+				// 	attrs: {
+				// 		fill: "#59d05d"
+				// 	}
+				// 	, attrsHover: {
+				// 		fill: "#59d05d"
+				// 	}					
+				// },
+				"MZ": {
+					tooltip: {content: "<b>Moçambique</b>"},
 					attrs: {
 						fill: "#59d05d"
 					}

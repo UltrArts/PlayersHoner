@@ -18,13 +18,16 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('layouts.app');
 // });
-Route::get('/', [AuthController::class, 'index'])->name('index');
+Route::get('/', [AuthController::class, 'index'])->name('login');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-Route::get('/players', [AdminController::class, 'showPlayers'])->name('admin.players');
-Route::get('/accounts', [AdminController::class, 'showAccounts'])->name('admin.accounts');
-Route::get('/settings', [AdminController::class, 'showSettings'])->name('admin.settings');
-Route::get('/incomings', [AdminController::class, 'showIncomings'])->name('admin.incomings');
-Route::get('/outcomings', [AdminController::class, 'showoutcomings'])->name('admin.outcomings');
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/players', [AdminController::class, 'showPlayers'])->name('admin.players');
+    Route::get('/accounts', [AdminController::class, 'showAccounts'])->name('admin.accounts');
+    Route::get('/settings', [AdminController::class, 'showSettings'])->name('admin.settings');
+    Route::get('/incomings', [AdminController::class, 'showIncomings'])->name('admin.incomings');
+    Route::get('/outcomings', [AdminController::class, 'showOutcomings'])->name('admin.outcomings');
+    Route::get('/bank', [AdminController::class, 'showBank'])->name('admin.bank');
+});

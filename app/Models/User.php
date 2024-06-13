@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use App\Traits\GeneratesCustomId;
+// use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, GeneratesCustomId;
+    use HasApiTokens, HasFactory, Notifiable, GeneratesCustomId, HasRoles;
     
     protected $primaryKey = 'id';
     public $incrementing = false;
@@ -48,4 +51,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function player():HasOne
+    {
+        return $this->hasOne(Player::class);
+    }
 }

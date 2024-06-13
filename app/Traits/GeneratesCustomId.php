@@ -20,17 +20,13 @@ trait GeneratesCustomId
                             ->where('id', '<', $prefix + 10000)
                             ->max('id');
 
-                if ($lastId) {
-                    $newId = $lastId + 1;
-                } else {
-                    $newId = $prefix + 1;
-                }
+                $newId = $lastId ? $lastId + 1 : $prefix + 1;
 
                 $model->id = $newId;
             } catch (QueryException $e) {
                 // Log or handle the exception
                 // This will prevent the creation if there's a database error
-                throw new \Exception('Failed to generate custom ID');
+                throw new \Exception('Failed to generate custom ID: '. $e->getMessage());
             }
         });
     }

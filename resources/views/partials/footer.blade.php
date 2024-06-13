@@ -20,7 +20,7 @@
             </ul>
         </nav>
         <div class="copyright ml-auto text-muted">
-        <?php echo date("Y"); ?> &copy; <strong><span></span></strong> Todos os Direitos Reservados <i class="text-danger"></i> <a href="">Sistema De Disponibilização Financeira</a>
+        <?php echo date("Y"); ?> &copy; <strong><span></span></strong> Todos os Direitos Reservados | <i class="text-danger"></i> <a href="">Sistema De Disponibilização Financeira</a>
         </div>				
     </div>
 </footer>

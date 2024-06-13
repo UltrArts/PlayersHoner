@@ -16,15 +16,18 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('tel');
-            $table->string('email')->nullable();
+            $table->string('tel2')->nullable();
+            $table->date('birth');
+            $table->string('email')->nullable()->unique();
             $table->boolean('is_retired')->default(false);
             $table->boolean('is_available')->default(true);
             $table->boolean('is_pre_register')->default(false);
+            $table->unsignedBigInteger('user_id');
             $table->date('retirement_date')->nullable();
-            $table->decimal('retirement_amount', 10, 2)->nullable();
             $table->timestamps();
 
-            $table->foreign('id_tax_type')->references('id')->on('tax_types')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
@@ -33,6 +36,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('players', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+
+        });
+
         Schema::dropIfExists('players');
     }
 };

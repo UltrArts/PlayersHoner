@@ -2,28 +2,29 @@
     <div class="card-header">
         <div class="card-title">Formulário de Jogadores</div>
     </div>
+    <form wire:submit.prevent='saveAccoount'>
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="banks">Banco</label>
-                    <select wire:model.change="bank" class="form-control input-pill  selectpicker" data-live-search="true" id="pillSelect">
-                        <option value="">-----SELECIONE O BANCO-----</option>
-                        @foreach ($banks as $bank)
-                            <option data-tokens="{{$bank->id}}">{{$bank->bank_name}}</option>
+                    <select wire:model="bank_id" class="form-control input-pill"  id="pillSelect">
+                        <option >-----SELECIONE O BANCO-----</option>
+                        @foreach (\App\Models\Bank::get() as $bank)
+                            <option value="{{$bank->id}}" data-tokens="{{$bank->id}}">{{$bank->bank_name}}</option>
                         @endforeach
                     </select>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="account">Conta Bancária</label>
-                    <input type="number"  class="form-control input-pill" id="account" placeholder="Conta Bancária">
+                    <label for="account">Número de Conta</label>
+                    <input wire:model='account_number' type="number"  class="form-control input-pill" id="account" placeholder="Número de Conta">
                 </div>
 
                 <div class="form-group">
                     <label for="nib">NIB</label>
-                    <input type="number"  class="form-control input-pill" id="nib" placeholder="NIB">
+                    <input wire:model='account_nib' type="number"  class="form-control input-pill" id="nib" placeholder="NIB">
                 </div>
             </div>
 
@@ -32,14 +33,15 @@
 
                 <div class="form-group">
                     <label for="pillSelect">Proprietário</label>
-                    <select class="form-control input-pill  selectpicker" data-live-search="true" id="pillSelect">
-                        <option data-tokens="Edson Da Cruz - 2024002">Edson Da Cruz - 2024002</option>
-                        <option  data-tokens="2">2</option>
-                        <option  data-tokens="3">3</option>
-                        <option  data-tokens="4">4</option>
-                        <option  data-tokens="5">5</option>
+                    <select wire:model='player_id' class="form-control input-pill  selectpicker" data-live-search="true" id="pillSelect">
+                        <option value="" >-----SELECIONE O PROPRIETÁRIO-----</option>
+                        @foreach (\App\Models\Player::get() as $player)
+                            <option value="{{$player->id}}"  data-tokens="2">{{$player->id}} - {{$player->name}} {{$player->last_name}}</option>
+                            
+                        @endforeach
                     </select>
                 </div>
+                
 
 
                 <div class="form-check">
@@ -57,7 +59,7 @@
 
                 <div class="form-group">
                     <label for="value">Valor a contribuir </label>
-                    <input type="number" class="form-control input-pill" id="value" placeholder="Valor">
+                    <input wire:model='tax_value' type="number" class="form-control input-pill success" id="value" placeholder="Valor">
                     <small class="text-muted">Se o tipo for percentagem só são permitidos, valores de 1 a 100</small>
                 </div>
             </div>
@@ -66,9 +68,14 @@
     <div class="row">
         <div class="col">
             <div class="card-action">
-                <button class="btn btn-success btn-rounded">Submiter</button>
-                <button class="btn btn-light btn-rounded ml-3">Limpar</button>
+                <button type="submit" class="btn btn-success btn-rounded">Guardar</button>
+                <button wire:click='clearFields' type="reset" class="btn btn-light btn-rounded ml-3">Limpar</button>
             </div>
         </div>
     </div>
+    </form>
+
+
+
+
 </div>

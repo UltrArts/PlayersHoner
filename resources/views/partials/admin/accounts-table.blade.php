@@ -20,10 +20,11 @@
         </div>
     </div>
     <div class="card-body table-responsive">
+        @if ($accounts->count() != 0)
         <table class="table table-head-bg-success table-hover">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Cód</th>
                     <th>Nr Conta</th>
                     <th>NIB</th>
                     <th>Banco</th>
@@ -33,55 +34,40 @@
                 </tr>   
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="">
-                            <span class="form-check-sign">Activo</span>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                    <td>
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="">
-                            <span class="form-check-sign">Activo</span>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    {{-- <td colspan="2">Larry the Bird</td> --}}
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
-                    <td>@twitter</td>
+                    @foreach ($accounts as $account)
+                    <tr>
+                            
+                        <td>{{$account->id}}</td>
+                        <td> {{$account->account_number}} </td>
+                        <td> {{$account->account_nib}} </td>
+                        <td> {{$account->bank->bank_name}} </td>
+                        <td> {{$account->player->name}} {{$account->player->last_name}} </td>
+                        <td> {{$account->balance}} </td>
+                        {{-- <td> {{$account->is_available}} </td> --}}
+                        <td>
+                            <label class="form-check-label btn btn-success btn-sm">
+                                {{-- <input class="form-check-input" type="checkbox" {{$account->is_available?'checked':''}} > --}}
+                                <span class="form-check-sign text-white">Activo</span>
+                            </label>
+                        </td>
+                    </tr>
+                    @endforeach
                     
-                    <td>
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" value="">
-                            <span class="form-check-sign">Activo</span>
-                        </label>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <p class="text-muted">
             <span class="badge badge-success">ESTADO </span> A conta com o estado <b>INACTIVO</b> não pode receber pensão.
             
         </p>
+        @else
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col">
+                        <img class="img-fluid" src="{{asset('assets/img/404.gif')}}" alt="">
+                    </div>
+                </div>
+            </div>
+        @endif
+
     </div>
 </div>

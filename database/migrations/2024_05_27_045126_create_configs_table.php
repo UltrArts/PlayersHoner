@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('configs', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
             $table->decimal('critical_balance', 10, 2);
-            $table->date('payment_date');
+            $table->integer('payment_day');
             $table->timestamps();
         });
     }

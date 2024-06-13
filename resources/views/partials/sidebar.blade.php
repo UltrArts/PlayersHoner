@@ -2,13 +2,13 @@
     <div class="scrollbar-inner sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="{{asset('assets/img/profile.jpg')}}">
+                <img src="{{asset('assets/img/profile.png')}}">
             </div>
             <div class="info">
                 <a class="" data-toggle="collapse" href="#userDetails" aria-expanded="true">
                     <span>
-                        Edson Da Cruz
-                        <span class="user-level">Administrator</span>
+                        {{Auth::user()->name}}
+                        <span class="user-level"> {{Auth::user()->getRoleNames()[0]=='admin'?'Administrador':'Jogador'}}</span>
                         <span class="caret"></span>
                     </span>
                 </a>
@@ -17,7 +17,7 @@
                 <div class="collapse in" id="userDetails" aria-expanded="true" style="">
                     <ul class="nav">
                         <li>
-                            <a href="#profile">
+                            <a href="#"   data-toggle="modal" data-target="#modalProfile">
                                 <span class="link-collapse">Perfil</span>
                             </a>
                         </li>
@@ -37,12 +37,13 @@
         </div>
         <ul class="nav">
             <li class="nav-item {{$page=='dashboardTab'? 'active':''}}">
-                <a href="{{ route('admin.dashboard') }}">
+                <a href="{{ route('dashboard') }}">
                     <i class="la la-dashboard"></i>
                     <p>Dashboard</p>
                     <span class="badge badge-count">5</span>
                 </a>
             </li>
+            @if(auth()->user()->hasRole('admin'))
             <li class="nav-item {{$page=='playersTab'? 'active':''}}">
                 <a href="{{ route('admin.players') }}">
                     <i class="la la-users"></i>
@@ -78,11 +79,20 @@
                     <span class="badge badge-danger">25</span>
                 </a>
             </li>
+            <li class="nav-item {{$page=='bankTab'? 'active':''}}">
+                <a href="{{ route('admin.bank') }}">
+                    <i class="la la-bank"></i>
+                    <p>Banco</p>
+                    {{-- <span class="badge badge-danger">25</span> --}}
+                </a>
+            </li>
+
+            @endif
             <li class="nav-item log-out">
                 <form action="{{ route('logout')}}" method="POST">
                     @csrf
                     @method('POST')
-                    <button type="submit"  data-toggle="modal" data-target="#modalUpdate">
+                    <button type="submit">
                         <i class="la la-power-off"></i>
                         <p>Logout</p>
                     </button>
