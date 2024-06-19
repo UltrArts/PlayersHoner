@@ -22,15 +22,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#edit">
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalEditProfile">
                                 <span class="link-collapse">Editar Perfil</span>
                             </a>
                         </li>
-                        {{-- <li>
-                            <a href="#settings">
-                                <span class="link-collapse">Settings</span>
-                            </a>
-                        </li> --}}
                     </ul>
                 </div>
             </div>
@@ -40,53 +35,13 @@
                 <a href="{{ route('dashboard') }}">
                     <i class="la la-dashboard"></i>
                     <p>Dashboard</p>
-                    <span class="badge badge-count">5</span>
+                    {{-- <span class="badge badge-count">5</span> --}}
                 </a>
             </li>
             @if(auth()->user()->hasRole('admin'))
-            <li class="nav-item {{$page=='playersTab'? 'active':''}}">
-                <a href="{{ route('admin.players') }}">
-                    <i class="la la-users"></i>
-                    <p>Jogadores</p>
-                    <span class="badge badge-count">14</span>
-                </a>
-            </li>
-            <li class="nav-item {{$page=='accountTab'? 'active':''}}">
-                <a href="{{ route('admin.accounts') }}">
-                    <i class="la la-credit-card"></i>
-                    <p>Contas</p>
-                    <span class="badge badge-count">50</span>
-                </a>
-            </li>
-            <li class="nav-item {{$page=='settingsTab'? 'active':''}}">
-                <a href="{{ route('admin.settings') }}">
-                    <i class="la la-cogs"></i>
-                    <p>Configurações</p>
-                    <span class="badge badge-count">6</span>
-                </a>
-            </li>
-            <li class="nav-item {{$page=='incomingsTab'? 'active':''}}">
-                <a href="{{ route('admin.incomings') }}">
-                    <i class="la la-bank"></i>
-                    <p>Contribuições</p>
-                    <span class="badge badge-success">3</span>
-                </a>
-            </li>
-            <li class="nav-item {{$page=='outcomingsTab'? 'active':''}}">
-                <a href="{{ route('admin.outcomings') }}">
-                    <i class="la la-money"></i>
-                    <p>Pagamentos</p>
-                    <span class="badge badge-danger">25</span>
-                </a>
-            </li>
-            <li class="nav-item {{$page=='bankTab'? 'active':''}}">
-                <a href="{{ route('admin.bank') }}">
-                    <i class="la la-bank"></i>
-                    <p>Banco</p>
-                    {{-- <span class="badge badge-danger">25</span> --}}
-                </a>
-            </li>
-
+                @include('partials.admin.menu-items')
+            @else
+                @include('partials.player.menu-items')
             @endif
             <li class="nav-item log-out">
                 <form action="{{ route('logout')}}" method="POST">

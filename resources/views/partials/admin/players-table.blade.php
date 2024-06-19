@@ -18,7 +18,6 @@
                             <a class="nav-link btn-sm {{$filter == $filterOpt[3]? 'active' : ''}}  "  wire:click.prevent="filtering('{{$filterOpt[3]}}')"  href="javascript:void(0)">Pré-Registados</a>
                         </li>
                     </ul>
-        
                 </div>
                 <div class="col text-right" >
                     <button {{$selected_player?'':'disabled'}} type="reset" wire:click="$refresh" class="btn btn-dafault btn-sm">Limpar</button>
@@ -42,7 +41,7 @@
         </div>
     </div>
     <div class="card-body table-responsive">
-        @if($players->count() != 0)
+    @if($players->count() != 0)
         <table class="table table-head-bg-success table-hover">
             <thead>
                 <tr>
@@ -67,17 +66,6 @@
                         <td>{{ Carbon\Carbon::parse($player->birth)->age }}</td>
                         <td class="{{$player->is_retired? "text-danger": "text-primary"}} "> <b>{{$player->is_retired? "Reformado": "Empregado"}} </b></td>
                         <td class="{{!$player->is_available? "text-danger": "text-primary"}} "> <b>{{!$player->is_available? "Inactivo": "Activo"}} </b></td>
-                        {{-- 'id', 
-                        'name', 
-                        'last_name', 
-                        'tel', 'tel2', 
-                        'birth', 
-                        'email',
-                        'is_retired', 
-                        'is_available', 
-                        'is_pre_register', 
-                        'user_id', 
-                        'retirement_date'    ]; --}}
                     </tr>
                 @endforeach
 

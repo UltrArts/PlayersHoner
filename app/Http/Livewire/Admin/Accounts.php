@@ -16,7 +16,7 @@ class Accounts extends Component
             $filterOpt = ['all', 'active', 'retired', 'preregiter'],
             $banks, $account_number, $accounts,
             $tax_types, $tax_type,
-            $account_nib, $tax_value, $bank_id, $player_id;
+            $account_nib, $tax_value, $bank_id, $player_id, $sent_player;
 
 
     protected $rules = [
@@ -54,12 +54,12 @@ class Accounts extends Component
         try {
             $this->validate();
 
-            if(($this->tax_type == 20240001) && ($this->tax_value < 1 || $this->tax_value > 100))
+            if(($this->tax_type == TaxType::first('id')) && ($this->tax_value < 1 || $this->tax_value > 100))
                 $this->emit('alert_response', 'Valor inválido!', 'error', Route::current()->getName());
             else
                 if(Account::where('player_id', $this->player_id)->first())
                     $this->emit('alert_response', 'O jogador já possui uma conta', 'error', Route::current()->getName());
-                else
+                else{}
                     if (Account::create([
                         'account_number'    =>  $this->account_number,
                         'account_nib'       =>  $this->account_nib,
@@ -70,6 +70,9 @@ class Accounts extends Component
                     ])) {
                         $this->emit('alert_response', 'Conta Salva com sucesso!', 'success', Route::current()->getName());
                         $this->clearFields();
+                        $this->is_new = false;
+                        if(session()->has('create_account'))
+                            session()->forget('create_account');
                     }else
                         $this->emit('alert_response', 'Falha ao Salvar Conta', 'error', Route::current()->getName());
 
@@ -87,18 +90,36 @@ class Accounts extends Component
         $this->tax_value = null;
         $this->bank_id = null;
         $this->tax_type = null;
+        $this->mount();
+    }
+
+    public function activate($acc_id, $pl_id, $status)
+    {
+        $acc = Account::find($acc_id);
+        $pl = Player::find($pl_id);
+        if($acc)
+            $acc->update(['is_available' => $status]);
+        if($pl)
+            $pl->update(['is_available' => $status]);
+        $this->mount();
     }
 
     public function mount()
     {
         $this->banks = Bank::get('bank_name');
-        $this->accounts = Account::with('player', 'bank')->get();
+        $this->accounts = Account::with('player', 'bank')->orderBy('updated_at', 'desc')->get();
         $this->tax_types = TaxType::get();
     }
 
     public function render()
     {
+        if($this->sent_player && session()->has('create_account')){
+            $this->player_id = $this->sent_player;
+            $this->sent_player = $this->sent_player;
+            $this->is_new = true;
+        } 
 
+            // dd($this->sent_player);
         return view('livewire.admin.accounts');
     }
 }

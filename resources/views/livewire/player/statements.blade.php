@@ -1,74 +1,55 @@
 <div>
+    {{-- Stop trying to control. --}}
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 
     <div class="content">
         <div class="container-fluid">
-            <h4 class="page-title">Contribuições</h4>
+            <h4 class="page-title">Transações</h4>
 
+            <button wire:click="setIsNew" class="btn btn-primary btn-sm mb-2"><i class="la la-download la-lg"> </i> Baixar Extrato</button>
 
 
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
                         <ul class="nav nav-pills nav-default">
-                            <i class="la la-filter la-2x mr-2"></i>
-                            
-                            <form class="navbar-left navbar-form nav-search mr-md-3" action="#">
-                                <div class="input-group">
-                                    <input type="text" placeholder="Search ..." class="form-control">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="la la-search search-icon"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
+                            <h5 class="text">
+                                <i class="la la-money la-lg mr-2"></i>
+                                Saldo disponível: 
+                                <b class="{{($balance <= App\Models\Config::first()->critical_balance)?'text-danger':'text-success' }}">${{number_format($balance, 2, '.', ',') .' Mzn'}}</b>
+                            </h5>
                 
-
 
                         </ul>
             
                     </div>
                 </div>
                 <div class="card-body table-responsive">
+                @if($trans->count() != 0)
                     <table class="table table-head-bg-success table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Cod</th>
                                 <th>Jogador</th>
                                 <th>Nr Conta</th>
-                                <th>Banco</th>
+                                <th>Tipo Transação</th>
                                 <th>Valor Contribuido</th>
                                 <th>Data</th>                
                             </tr>   
                         </thead>
                         <tbody>
+                            @foreach ($trans as $tra)
                             <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
+                                <td> {{$tra->id}} </td>
+                                <td> {{$tra->account->player->name}} {{$tra->account->player->last_name}} </td>
+                                <td> {{$tra->account->account_number}} </td>
+                                <td> {{($tra->transactionType->type == 'credit')?'Crédito':'Débito'}} </td>
+                                <td class="{{ ($tra->transactionType->type == 'debit')? 'text-danger':''}} font-weight-bold"> 
+                                    {{($tra->transactionType->type == 'debit')? '-'. number_format($tra->value, 2, '.', ',') .'Mzn' :  number_format($tra->value, 2, '.', ',') .' Mzn'}} 
+                                </td>
+                                <td> {{$tra->created_at->diffForHumans()}} </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                {{-- <td colspan="2">Larry the Bird</td> --}}
-                                <td>@twitter</td>
-                                <td>@twitter</td>
-                                <td>@twitter</td>
-                                <td>@twitter</td>
-                                <td>@twitter</td>
-                                
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
 
@@ -93,6 +74,18 @@
                     </p>
 
                 </div>
+
+                @else
+
+                    <div class="container">
+                        <div class="row justify-content-center text-center">
+                            <div class="col">
+                                <img class="img-fluid" src="{{asset('assets/img/404.gif')}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                        
+                @endif
             </div>
 
 

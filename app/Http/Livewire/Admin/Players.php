@@ -23,13 +23,13 @@ class Players extends Component
 
     public function mount()
     {
-        $this->players = Player::get();
+        $this->players = Player::orderBy('created_at', 'desc')->get();
         // $this->emit('alert_response', $message, $status, $url);
     }
 
     public function selectedRow($id)
     {
-            $this->selected_player = Player::find($id) ? : null;
+        $this->selected_player = Player::find($id) ? : null;
     }
 
     public function enable()
@@ -99,7 +99,7 @@ class Players extends Component
             ]);
     
             if($user){
-                $user->player()->create([
+                $player = $user->player()->create([
                         'name'      =>  $this->name,
                         'last_name' =>  $this->last_name,
                         'tel'       =>  $this->tel,
@@ -111,6 +111,8 @@ class Players extends Component
                 $this->emit('alert_response', 'Jogador Salvo Com sucesso!', 'success', Route::current()->getName());
                 $this->clearFields();
                 $this->mount();
+                session(['create_account' => true]);;
+                return redirect()->route('admin.accounts', $player->id);
                 // $this->setIsNew();
             }else{
                 $this->emit('alert_response', 'Falha ao Salvar Jogador', 'error', Route::current()->getName());

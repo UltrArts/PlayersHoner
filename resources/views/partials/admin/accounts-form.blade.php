@@ -36,8 +36,7 @@
                     <select wire:model='player_id' class="form-control input-pill  selectpicker" data-live-search="true" id="pillSelect">
                         <option value="" >-----SELECIONE O PROPRIETÁRIO-----</option>
                         @foreach (\App\Models\Player::get() as $player)
-                            <option value="{{$player->id}}"  data-tokens="2">{{$player->id}} - {{$player->name}} {{$player->last_name}}</option>
-                            
+                            <option  {{$player->id == $sent_player ? 'selected': ''}} value="{{$player->id}}"  data-tokens="2">{{$player->id}} - {{$player->name}} {{$player->last_name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -45,7 +44,7 @@
 
 
                 <div class="form-check">
-                    <label>Tipo de contribuição {{$tax_type}}</label><br/>
+                    <label>Tipo de contribuição</label><br/>
                     <label class="form-radio-label">
                         <input wire:model='tax_type' class="form-radio-input" type="radio" name="optionsRadios" value="{{$this->tax_types[0]->id}}"  checked="">
                         <span class="form-radio-sign"> {{$this->tax_types[0]->type}}</span>

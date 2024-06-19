@@ -2042,14 +2042,14 @@ body {
   background: #007542;
   position: fixed;
   z-index: 1001;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #58BB43;
 }
 .main-header .logo-header {
   float: left;
   width: 260px;
   height: 55px;
   line-height: 55px;
-  border-right: 1px solid #eee;
+  /* border-right: 1px solid #eee; */
   color: #333333;
   z-index: 1001;
   font-size: 18px;

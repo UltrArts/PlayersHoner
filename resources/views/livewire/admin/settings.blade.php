@@ -12,20 +12,25 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                
                                 <div class="form-group">
                                     <label for="account">Valor Crítico</label>
                                     <input wire:model="critical_balance" type="number"  class="form-control input-pill" id="account" placeholder="Valor considerado crítico nas contas">
                                 </div>
-                
+                                <div class="form-group">
+                                    <label for="account">Valor mínimo de depósito</label>
+                                    <input wire:model="min_value" type="number"  class="form-control input-pill" id="account" placeholder="Valor considerado crítico nas contas">
+                                </div>
                             </div>
                 
                             <div class="col-md-6">
-                
-                
                                 <div class="form-group">
                                     <label for="value">Dia de Pagamento</label>
                                     <input wire:model="payment_day" type="number" class="form-control input-pill" id="value" placeholder="Dia de pagamento de pensões">
+                                    {{-- <small class="text-muted">Se o tipo for percentagem só são permitidos, valores de 1 a 100</small> --}}
+                                </div>
+                                <div class="form-group">
+                                    <label for="value">Hora de Pagamento</label>
+                                    <input wire:model="payment_time" type="time" class="form-control input-pill" id="value" placeholder="Dia de pagamento de pensões">
                                     {{-- <small class="text-muted">Se o tipo for percentagem só são permitidos, valores de 1 a 100</small> --}}
                                 </div>
                             </div>

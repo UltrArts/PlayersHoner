@@ -5,6 +5,12 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicon/favicon-32x32.png')}}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/favicon/favicon-16x16.png')}}">
+	<link rel="manifest" href="{{asset('assets/img/favicon/site.webmanifest')}}">
+
 	<title>{{$title}}</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 	<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
@@ -12,6 +18,7 @@
 	<link rel="stylesheet" href="{{asset('assets/css/ready.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/demo.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
+	
 	<livewire:styles/>
 </head>
 <body>
@@ -26,8 +33,8 @@
 	</div>
 	<!-- Modal -->
 	
-	@include('partials.modals')
 	@include('partials.alerts')
+	@livewire('profile-component')
 	<livewire:scripts/>
 	
 	<script src="{{asset('assets/js/core/jquery.3.2.1.min.js')}}"></script>
@@ -44,6 +51,7 @@
 	<script src="{{asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
 	<script src="{{asset('assets/js/ready.min.js')}}"></script>
 	<script src="{{asset('assets/js/demo.js')}}"></script>
+	<script src="{{asset('assets/js/main.js')}}"></script>
 
 	@if(session()->has('welcome'))
 		<script>

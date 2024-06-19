@@ -16,7 +16,7 @@
                 </ul>
                 <form  action="{{ route('logout')}}" method="POST" class="d-flex">
                     @csrf
-                  <button class="btn btn-outline-danger" type="submit">Logout</button>
+                  <button class="btn btn-outline-danger btn-sm" type="submit">Logout</button>
                 </form>
               </div>
             </div>
@@ -28,24 +28,25 @@
         <div class="card ">
             <div class="card-header">
                 <h4 class="card-title">Formulário de Transferência Bancária</h4>
-                <h5 class="text-dark"> {{$selected_account_id}} </h5>
             </div>
             <form wire:submit.prevent='transfer'>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
+                            
                             <div class="form-group">
-
-                                <div class="form-group">
-                                    <label for="value">Valor a transferir </label>
-                                    <input wire:model='value' type="number" class="form-control input-pill success" id="value" placeholder="Valor">
-                                </div>
-        
+                                <label for="value">Valor a transferir </label>
+                                <input wire:model='value' type="number" class="form-control input-pill success" id="value" placeholder="Valor">
+                            </div>
+                                    
+                            <div class="form-group">
                                 <label for="banks">Conta Bancária Beneficiária</label>
                                 <select wire:model="selected_account_id" class="form-control input-pill"  id="pillSelect">
                                     <option >----- SELECIONE A CONTA BENEFICIÁRIA -----</option>
                                     @foreach (\App\Models\Account::with('player', 'bank')->get() as $account)
-                                        <option value="{{$account->id}}" data-tokens="{{$account->id}}">{{$account->account_number}} </option>
+                                        @if (! $account->player->is_retired)
+                                            <option value="{{$account->id}}" data-tokens="{{$account->id}}">{{$account->account_number}} </option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>

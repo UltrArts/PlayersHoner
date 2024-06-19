@@ -15,6 +15,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id')->primary();
             $table->decimal('critical_balance', 10, 2);
             $table->integer('payment_day');
+            $table->time('time')->nullable();
+            $table->decimal('min_value', 10, 2);
             $table->timestamps();
         });
     }

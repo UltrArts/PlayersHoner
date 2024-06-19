@@ -9,6 +9,8 @@ use App\Models\{
     TransactionType,
     Transaction,
 };
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class Bank extends Component
@@ -47,10 +49,12 @@ class Bank extends Component
                         'transaction_type_id'   => $transation_type->id
                     ]);
             if($trans->save()){
-                $this->emit('alert_response', 'Transferência efectuada com sucesso!', 'success', '');
                 //Updating the balance
                 $this->selected_account->balance = $this->selected_account->balance + $val;
                 $this->selected_account->save();
+                $this->clearFields();
+
+                $this->emit('alert_response', 'Transferência efectuada com sucesso!', 'success', '');
             }else
                 $this->emit('alert_response', 'Houve uma falha na transferência', 'error', '');
 

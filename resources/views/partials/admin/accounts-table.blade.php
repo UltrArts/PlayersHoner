@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <div class="card-title">
-            <ul class="nav nav-pills nav-default">
+            {{-- <ul class="nav nav-pills nav-default">
                 <i class="la la-filter la-2x mr-2"></i>
                 <li class="nav-item ">
                     <a type="button" class="nav-link btn-sm {{$filter == $filterOpt[0]? 'active' : ''}} " wire:click.prevent="filtering('{{$filterOpt[0]}}')" href="#">Todos</a>
@@ -15,8 +15,8 @@
                 <li class="nav-item ">
                     <a class="nav-link btn-sm {{$filter == $filterOpt[3]? 'active' : ''}}  "  wire:click.prevent="filtering('{{$filterOpt[3]}}')"  href="javascript:void(0)">Pré-Registados</a>
                 </li>
-            </ul>
-
+            </ul> --}}
+            Contas de Jogadores
         </div>
     </div>
     <div class="card-body table-responsive">
@@ -40,14 +40,23 @@
                         <td>{{$account->id}}</td>
                         <td> {{$account->account_number}} </td>
                         <td> {{$account->account_nib}} </td>
-                        <td> {{$account->bank->bank_name}} </td>
-                        <td> {{$account->player->name}} {{$account->player->last_name}} </td>
-                        <td> {{$account->balance}} </td>
+                        <td> {{optional($account->bank)->bank_name}} </td>
+                        <td> {{optional($account->player)->name}} {{optional($account->player)->last_name}} </td>
+                        <td>  {{number_format(optional($account)->balance, 2, '.', ',') .' Mzn'}}  </td>
                         {{-- <td> {{$account->is_available}} </td> --}}
                         <td>
-                            <label class="form-check-label btn btn-success btn-sm">
-                                {{-- <input class="form-check-input" type="checkbox" {{$account->is_available?'checked':''}} > --}}
-                                <span class="form-check-sign text-white">Activo</span>
+                            
+                            <label 
+                                    wire:click="activate('{{$account->id}}', 
+                                                                    '{{optional($account->player)->id}}', 
+                                                                    '{{ optional($account->player)->is_available}}')" class="form-check-label btn {{optional($account->player)->is_available? ' btn-success' :'btn-warning' }} btn-sm">
+                                <span class="form-check-sign text-white">
+                                    @if (optional($account->player)->is_available)
+                                        Activo
+                                    @else
+                                        Inactivo
+                                    @endif
+                                </span>
                             </label>
                         </td>
                     </tr>

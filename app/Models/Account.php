@@ -39,5 +39,14 @@ class Account extends Model
         return $this->belongsTo(TaxType::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
+
 
 }
