@@ -57,15 +57,15 @@
             </thead>
             <tbody>
                 @foreach ($players as $player)
-                    <tr class="{{optional($selected_player)->id==$player->id?'bg-success':''}}" wire:click="selectedRow('{{$player->id}}')">
+                    <tr style="cursor: pointer;" class="{{optional($selected_player)->id==$player->id?'bg-success':''}}" wire:click="selectedRow('{{$player->id}}')">
                         <td> {{$player->id}} </td>
                         <td> {{$player->name}} </td>
                         <td>{{$player->last_name}} </td>
                         <td>{{$player->email}} </td>
                         <td>{{$player->tel}} @if(!empty($player->tel2)) e {{$player->tel2}} @endif</td>
                         <td>{{ Carbon\Carbon::parse($player->birth)->age }}</td>
-                        <td class="{{$player->is_retired? "text-danger": "text-primary"}} "> <b>{{$player->is_retired? "Reformado": "Empregado"}} </b></td>
-                        <td class="{{!$player->is_available? "text-danger": "text-primary"}} "> <b>{{!$player->is_available? "Inactivo": "Activo"}} </b></td>
+                        <td> <span class="{{$player->is_retired? "badge badge-danger": "badge badge-primary"}} ">{{$player->is_retired? "Reformado": "Empregado"}} </span></td>
+                        <td> <span class="{{!$player->is_available? "badge badge-danger": "badge badge-primary"}} ">{{!$player->is_available? "Inactivo": "Activo"}} </span></td>
                     </tr>
                 @endforeach
 

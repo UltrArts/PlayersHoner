@@ -15,7 +15,7 @@
                     <p class="text-muted">  {{Auth::user()->name}}</p> <a  data-toggle="modal" data-target="#modalEditProfile"  href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-dismiss="modal" data-abc="true">Editar</a>
                     @if(Auth::user()->hasRole('player'))
                     <div class="row text-center m-t-20">
-                        @if (!$auth_player->is_pre_register)
+                        @if ($auth_player->is_pre_register)
                             <div class="col ">
                                 <h4 class="">Confirmação de Registo Pendente.</h4>
                             </div>

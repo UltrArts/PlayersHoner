@@ -14,7 +14,7 @@
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link btn-sm {{$filter == $filterOpt[3]? 'active' : ''}}  "  wire:click.prevent="filtering('{{$filterOpt[3]}}')"  href="javascript:void(0)">Pré-Registados</a>
-                </li>
+                </li>   
             </ul> --}}
             Contas de Jogadores
         </div>
@@ -46,10 +46,7 @@
                         {{-- <td> {{$account->is_available}} </td> --}}
                         <td>
                             
-                            <label 
-                                    wire:click="activate('{{$account->id}}', 
-                                                                    '{{optional($account->player)->id}}', 
-                                                                    '{{ optional($account->player)->is_available}}')" class="form-check-label btn {{optional($account->player)->is_available? ' btn-success' :'btn-warning' }} btn-sm">
+                            <label class="form-check-label badge {{optional($account->player)->is_available? ' badge-success' :'badge-warning' }} badge-sm">
                                 <span class="form-check-sign text-white">
                                     @if (optional($account->player)->is_available)
                                         Activo

@@ -52,7 +52,7 @@
                         </thead>
                         <tbody>
                             @foreach ($trans as $tra)
-                                <tr class="{{(optional($selected_trans)->id === $tra->id)?'bg-success':''}}" wire:click="selectedRow('{{$tra->id}}')">
+                                <tr style="cursor: pointer;" class="{{(optional($selected_trans)->id === $tra->id)?'bg-success':''}}" wire:click="selectedRow('{{$tra->id}}')">
                                     <td> {{$tra->id}} </td>
                                     <td> {{$tra->account->player->name}} {{$tra->account->player->last_name}} </td>
                                     <td> {{$tra->account->account_number}} </td>

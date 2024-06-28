@@ -5,8 +5,7 @@
     <div class="content">
         <div class="container-fluid">
             <h4 class="page-title">Transações</h4>
-
-            <button wire:click="setIsNew" class="btn btn-primary btn-sm mb-2"><i class="la la-download la-lg"> </i> Baixar Extrato</button>
+            <button wire:click="downloadStatement" class="btn btn-primary btn-sm mb-2"><i class="la la-download la-lg"> </i> Baixar Extrato</button>
 
 
             <div class="card">
@@ -19,7 +18,6 @@
                                 <b class="{{($balance <= App\Models\Config::first()->critical_balance)?'text-danger':'text-success' }}">${{number_format($balance, 2, '.', ',') .' Mzn'}}</b>
                             </h5>
                 
-
                         </ul>
             
                     </div>
@@ -87,6 +85,10 @@
                         
                 @endif
             </div>
+
+            <span class="text-danger">
+                {{-- @dump($val) --}}
+            </span>
 
 
 
